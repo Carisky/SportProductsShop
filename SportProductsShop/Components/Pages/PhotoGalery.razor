@@ -1,0 +1,14 @@
+﻿@page "/photogalery"
+@inject NavigationManager NavigationManager
+
+@code {
+    protected override void OnInitialized()
+    {
+        NavigateToOtherPage();
+    }
+
+    private void NavigateToOtherPage()
+    {
+        NavigationManager.NavigateTo("/indevelopment",true,true);
+    }
+}

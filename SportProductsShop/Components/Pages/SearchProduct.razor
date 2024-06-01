@@ -1,0 +1,47 @@
+﻿@page "/searchproduct"
+<h3>Search Products</h3>
+
+<input type="text" id="searchInput" placeholder="Search by name" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody id="productsTableBody">
+        <!-- Filtered products will be inserted here -->
+    </tbody>
+</table>
+
+<script>
+    // Модель данных для продукта
+    var allProducts = [
+        { Id: 1, Name: "Product 1" },
+        { Id: 2, Name: "Product 2" },
+        { Id: 3, Name: "Product 3" }
+    ];
+
+    function updateFilteredProducts() {
+        var searchTerm = document.getElementById("searchInput").value.trim().toLowerCase();
+        var filteredProducts = allProducts.filter(function (product) {
+            return product.Name.toLowerCase().includes(searchTerm);
+        });
+        renderProducts(filteredProducts);
+    }
+
+    function renderProducts(products) {
+        var productsTableBody = document.getElementById("productsTableBody");
+        productsTableBody.innerHTML = "";
+        products.forEach(function (product) {
+            var row = document.createElement("tr");
+            row.innerHTML = "<td>" + product.Id + "</td><td>" + product.Name + "</td>";
+            productsTableBody.appendChild(row);
+        });
+    }
+
+    updateFilteredProducts();
+
+    document.getElementById("searchInput").addEventListener("input", updateFilteredProducts);
+</script>
